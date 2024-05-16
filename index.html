@@ -8,11 +8,13 @@
        body, html {
         display: flex;
         justify-content: center;
+        align-items: center;
         margin: 0;
         height: 100%;
         font-family:'Courier New', Courier, monospace ;
-        font-size: 20px;
+        font-size: 16px;
         background-color: rgb(14, 17, 61);
+       
        }
     </style>
 </head>
@@ -50,6 +52,7 @@
             background-repeat: no-repeat;
             background-size: contain;
             z-index: 20;
+        
             "
         >
             <div style="text-align: center;">
@@ -64,13 +67,24 @@
                     position: absolute;
                     color: azure;
                     top: 20%;
-                    left: 15%;
+                    left: 20%;
                     transform: translate(-50% -50%);
                 "
         >Iniciar</span>
     </div>
             </div>
         </div><!--Fim startScreen--> 
+
+        <div id="restartScreen">
+            <div>
+                    <h1>Game Over</h1>
+                        <div id="restartButton">
+                            <img src="./img/button.png" alt="Restart Button" />
+                            <span>Reiniciar</span>
+                        </div>
+            </div>
+
+        </div><!--FIM restartScreen-->
     </div>
 </body>
 </html>
