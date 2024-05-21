@@ -27,15 +27,15 @@ const audio = {
         src: "./audio/gameOver.mp3"
         }),
 
-        select: new Howl({
+    select: new Howl({
         src: "./audio/select.mp3"
         }),
 
-        shoot: new Howl({
+    shoot: new Howl({
             src: "./audio/shoot.wav"
         }),
 
-        start: new Howl({
+    start: new Howl({
             src: "./audio/start.mp3/"
         })
 };
