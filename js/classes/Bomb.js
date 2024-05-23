@@ -51,9 +51,9 @@ explode() {
         color: "red",
     });
     gsap.to(this,{
-        delay: 0.1;
+        delay: 0.1,
         opacity: 0,
-        duration: 0.15,
+    duration: 0.15,
     })
   }
 }
