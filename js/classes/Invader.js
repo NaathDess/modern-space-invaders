@@ -1,4 +1,4 @@
-class invader {
+class Invader {
   constructor({ position }) {
     this.velocity = {
       x: 0,
