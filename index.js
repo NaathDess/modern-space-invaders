@@ -183,4 +183,27 @@ function animate() {
       particle.update();
     }
   });
+
+  invadersProjectiles.forEach((invaderProjectile, index) => {
+    if (
+      invaderProjectile.position.y + invaderProjectile.height >=
+      canvas.height
+    ) {
+      setTimeout(() => {
+        invaderProjectile.splice(index, 1);
+      }, 0);
+    } else {
+      invaderProjectile.update();
+    }
+
+    if (
+      rectangularCollision({
+        rectangular1: invaderProjectile,
+        rectangular2: player
+      })
+    ) {
+      invaderProjectile.splice(index, 1);
+      endGame();
+    }
+  });
 }
