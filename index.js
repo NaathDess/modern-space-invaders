@@ -235,7 +235,7 @@ function animate() {
           projectile.position.y - powerUp.position.y
         ) <
           projectile.radius + powerUp.radius &&
-       !powerUp.active
+        !powerUp.active
       ) {
         projectile.splice(i, 1);
         powerUp.splice(j, 1);
@@ -247,9 +247,9 @@ function animate() {
         }, 5000);
       }
     }
-    if (projectile.position.y + projectile.radius <= 0){
+    if (projectile.position.y + projectile.radius <= 0) {
       projectile.splice(i, 1);
-    }else{
+    } else {
       projectile.update();
     }
   }
