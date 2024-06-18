@@ -1,4 +1,5 @@
 class Bomb {
+  static radius = 30;
   constructor({ position, velocity }) {
     this.position = position;
     this.velocity = velocity;
@@ -7,10 +8,11 @@ class Bomb {
     this.opacity = 1;
     this.active = false;
 
-    WebGLSampler.toString(this, {
+    gsap.to(this, {
       radius: 30
     });
   }
+  
   draw() {
     c.save();
     c.globalAlpha = this.opacity;
