@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="shortcut icon" href="img/spaceship.png" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="img/spaceship.png" type="image/x-icon" />
-    <title>Space Invaders</title>
+    <title>Modern Space Invaders</title>
     <style>
       body,
       html {
@@ -20,8 +20,8 @@
         margin: 0;
         height: 100%;
         font-family: "Press Start 2P", Courier, monospace;
-        font-size: 16px;
-        background-color: rgb(14, 17, 61);
+        font-size: 14px;
+        background-color:black;
       }
     </style>
   </head>
@@ -33,9 +33,9 @@
           position: absolute;
           z-index: 10;
           color: azure;
+          left: 10px;
+          top: 10px;
           margin: 0;
-          left: 20px;
-          top: 20px;
           display: none;
         "
       >
@@ -43,44 +43,43 @@
         <span id="scoreEl">0</span>
       </p>
       <canvas></canvas>
-
       <div
         id="startScreen"
         style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
           background: url('./img/startScreenBackground.png');
-          background-repeat: no-repeat;
           background-size: contain;
+          background-repeat: no-repeat;
           z-index: 20;
-          font-size: 10px;
         "
       >
         <div style="text-align: center">
           <h1 style="color: azure">Space Invaders</h1>
           <div
             id="startButton"
-            style="position: relative; display: inline-block; cursor: pointer"
+            style="cursor: pointer; position: relative; display: inline-block;"
           >
             <img src="./img/button.png" alt="Start Button" />
             <span
               style="
                 position: absolute;
                 color: azure;
-                top: 20%;
-                left: 20%;
+                top: 50%;
+                left: 50%;
                 transform: translate(-50% -50%);
                 font-size: 10px;
               "
               >Iniciar</span
             >
           </div>
+          <!--- Fim do id startButton -->
         </div>
       </div>
       <!--Fim startScreen-->
@@ -88,44 +87,45 @@
       <div
         id="restartScreen"
         style="
+         display: none;
+         justify-content: center;
+         align-items: center;
           position: absolute;
           top: 0;
           left: 0;
-          bottom: 0;
           right: 0;
-          background: url('./img/startScreenBackground.png');
-          z-index: 20;
+          bottom: 0;
+          background: url('./img/restartScreenBackground.png');
           background-size: contain;
           background-repeat: no-repeat;
-          display: none;
-          align-items: center;
-          justify-content: center;
+          z-index: 20;
         "
       >
         <div style="text-align: center">
           <h1 style="color: azure">Game Over</h1>
           <div
             id="restartButton"
-            style="position: relative; display: inline-block; cursor: pointer"
+            style="cursor: pointer; position: relative; display: inline-block"
           >
             <img src="./img/button.png" alt="Restart Button" />
             <span
               style="
                 position: absolute;
                 color: azure;
-                top: 25%;
-                left: 15%;
+                top: 50%;
+                left: 50%;
                 transform: translate(-50%-50%);
                 font-size: 10px;
               "
               >Reiniciar</span
             >
           </div>
+          <!-- Fim do id restartButton -->
         </div>
       </div>
-      <!--FIM restartScreen-->
+      <!--FIM do id restartScreen-->
     </div>
-    <!--FIM id="parentDiv"-->
+    <!--FIM do id parentDiv-->
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
