@@ -1,18 +1,17 @@
-const scoreEL = document.querySelector("#scoreEL");
+const scoreEl = document.querySelector("#scoreEl");
 const canvas = document.querySelector("canvas");
-const c = canvasEl.getContext("2d");
+const c = canvas.getContext("2d");
 
 canvas.width = 1024;
 canvas.height = 576;
 
+let player = new Player();
 let projectiles = [];
 let grids = [];
 let invadersProjectiles = [];
 let particles = [];
 let bombs = [];
 let powerUps = [];
-
-let player = new Player();
 
 let keys = {
   ArrowLeft: {
@@ -35,6 +34,7 @@ let game = {
 };
 
 let score = 0;
+
 let spawnBuffer = 500;
 let fps = 60;
 let fpsInterval = 1000 / fps;
@@ -49,7 +49,6 @@ function init() {
   particles = [];
   bombs = [];
   powerUps = [];
-  frames = 0;
 
   keys = {
     ArrowLeft: {
@@ -93,6 +92,12 @@ function init() {
 
 function endGame() {
   audio.gameOver.play();
+
+  setTimeout(() => {
+    player.opacity = 0;
+    game.over = true;
+  }, 0);
+
   setTimeout(() => {
     game.active = false;
     document.querySelector("restartScreen").computedStyleMap.display = "flex";
@@ -109,10 +114,11 @@ function animate() {
   if (!game.active) return;
   requestAnimationFrame(animate);
 
-  let msNow = window.performance.now();
-  let elapsed = msNow - msPrev;
+  const msNow = window.performance.now();
+  const elapsed = msNow - msPrev;
 
   if (elapsed < fpsInterval) return;
+
   msPrev = msNow - (elapsed % fpsInterval);
 
   c.fillStyle = "black";
@@ -372,21 +378,21 @@ function animate() {
     player.rotation = 0;
   }
 
-  if(frames % randomInterval === 0) {
+  if (frames % randomInterval === 0) {
     spawnBuffer = spawnBuffer < 0 ? 100 : spawnBuffer;
     grids.push(new Grid());
     randomInterval = Math.floor(Math.random() * 500 + spawnBuffer);
     frames = 0;
     spawnBuffer -= 100;
-  } 
+  }
 
-  if(
+  if (
     keys.Space.pressed &&
     player.powerUp === "Metralhadora" &&
     frames % 2 === 0 &&
     !game.over
   ) {
-    if(frames % 6 === 0) audio.shoot.play();
+    if (frames % 6 === 0) audio.shoot.play();
     projectiles.push(
       new Projectile({
         position: {
@@ -399,7 +405,7 @@ function animate() {
         },
         color: "yellow"
       })
-    )
+    );
   }
   frames++;
 }
@@ -408,8 +414,62 @@ document.querySelector("#startButton").addEventListener("click", () => {
   audio.backgroundMusic.play();
   audio.start.play();
 
-  document.querySelector("#startButton").style.display = "none";
+  document.querySelector("#startScreen").style.display = "none";
   document.querySelector("#scoreContainer").style.display = "block";
   init();
   animate();
+});
+
+document.querySelector("#restartButton").addEventListener("click", () => {
+  audio.select.play();
+
+  document.querySelector("#restartScreen").style.display = "none";
+  init();
+  animate();
+});
+
+addEventListener("keydown", ({ key }) => {
+  if (game.over) return;
+
+  switch (key) {
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = true;
+      break;
+    case "ArrowRight":
+      keys.ArrowRight.pressed = true;
+      break;
+    case "Space":
+      keys.space.pressed = true;
+
+      if (player.powerUp === "Metralhadora") return;
+
+      audio.shoot.play();
+      projectiles.push(new Projectile({
+        position: {
+          x: player.position.x + player.width / 2,
+          y: player.position.y
+        },
+        velocity: {
+          x: 0,
+          y: -10
+        },
+        color: "yellow"
+      })
+    );
+    break;
+  }
+});
+
+addEventListener("keyup", ({ key }) => {
+  switch (key) {
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = false;
+      break;
+    case "ArrowRight":
+      keys.ArrowRight.pressed = false;
+      break;
+    case "Space":
+      keys.space.pressed = false;
+      break;
+  }
 });
