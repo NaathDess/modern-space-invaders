@@ -12,7 +12,7 @@ class Bomb {
       radius: 30
     });
   }
-  
+
   draw() {
     c.save();
     c.globalAlpha = this.opacity;
@@ -46,10 +46,12 @@ class Bomb {
     this.active = true;
     this.velocity.x = 0;
     this.velocity.y = 0;
+
     gsap.to(this, {
       radius: 200,
       color: "red"
     });
+
     gsap.to(this, {
       delay: 0.1,
       opacity: 0,

@@ -17,12 +17,13 @@ class Player {
       this.height = image.height * scale;
       this.position = {
         x: canvas.width / 2 - this.width / 2,
-        y: canvas.height / 2 - this.height - 20
+        y: canvas.height - this.height - 20
       };
-    };
     this.particles = [];
-    theis.frames = 0;
+    this.frames = 0;
+    };
   }
+
   draw() {
     c.save();
     c.globalAlpha = this.opacity;
@@ -30,21 +31,25 @@ class Player {
       player.position.x + player.width / 2,
       player.position.y + player.height / 2
     );
-    c.rotate(this.rotate);
+
+    c.rotate(this.rotation);
+
     c.translate(
-      -player.position.x + player.width / 2,
-      -player.position.y + player.height / 2
+      -player.position.x - player.width / 2,
+      -player.position.y - player.height / 2
     );
+
     c.drawImage(
       this.image,
-      player.position.x,
-      player.position.y,
+      this.position.x,
+      this.position.y,
       this.width,
       this.height
     );
 
     c.restore();
   }
+
   update() {
     if (!this.image) return;
     this.draw();
@@ -55,8 +60,8 @@ class Player {
       this.particles.push(
         new Particle({
           position: {
-            x: player.position.x + player.width / 2,
-            y: player.position.y + player.height
+            x: this.position.x + this.width / 2,
+            y: this.position.y + this.height
           },
           velocity: {
             x: (Math.random() - 0.5) * 1.5,
@@ -67,7 +72,6 @@ class Player {
           fades: true
         })
       );
-      this.frames = 0;
     }
   }
 }
