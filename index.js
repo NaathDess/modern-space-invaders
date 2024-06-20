@@ -5,6 +5,9 @@ const c = canvas.getContext("2d");
 canvas.width = 1024;
 canvas.height = 576;
 
+const backgroundImage = new Image();
+backgroundImage.src = "img/frame-sprite.png";
+
 let player = new Player();
 let projectiles = [];
 let grids = [];
@@ -118,8 +121,8 @@ function animate() {
 
   msPrev = msNow - (elapsed % fpsInterval);
 
-  c.fillStyle = "black";
-  c.fillRect(0, 0, canvas.width, canvas.height);
+  c.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+  
 
   for (let i = powerUps.length - 1; i >= 0; i--) {
     const powerUp = powerUps[i];
